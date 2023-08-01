@@ -8,13 +8,20 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/wangli/Desktop/Codeshare/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/wangli/Desktop/Codeshare/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+<div class="row">
+  {% for item in notes %}
+		<div class="card col-4 col">
+			<div class="card-body">
+				<h4 class="card-title">{{ item.title }}</h4>
+				<h5 class="card-subtitle">{{ item.user.username }}</h5>
+				<p class="card-text">{{ item.content|slice(0,80) }}</p>
+				<p class="card-text">{{ item.createdAt|date('d/m/Y') }}</p>
+				
+	</div>
+    {% endfor %}
+        <div class="row flex-center">
+		{{ knp_pagination_render(notes) }}
+	    </div>
+  
 </div>
 {% endblock %}
