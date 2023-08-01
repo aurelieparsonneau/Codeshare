@@ -127,5 +127,21 @@
     </main>
 
 
+=======
+<div class="row">
+  {% for item in notes %}
+		<div class="card col-4 col">
+			<div class="card-body">
+				<h4 class="card-title">{{ item.title }}</h4>
+				<h5 class="card-subtitle">{{ item.user.username }}</h5>
+				<p class="card-text">{{ item.content|slice(0,80) }}</p>
+				<p class="card-text">{{ item.createdAt|date('d/m/Y') }}</p>
+				
+	</div>
+    {% endfor %}
+        <div class="row flex-center">
+		{{ knp_pagination_render(notes) }}
+	    </div>
+  
 </div>
 {% endblock %}
