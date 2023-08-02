@@ -1,0 +1,9 @@
+.col-30 {
+    width: 30%;
+}
+
+@media screen and (width < 768px) {
+    .col-30 {
+        width: 90%;
+    }
+}
