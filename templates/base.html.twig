@@ -8,6 +8,7 @@
             <link rel="shortcut icon" href={{asset('img/favicon.svg')}} type="image/x-icon">
 
     </head>
+    
 <body>
 		 <header class="py-3 mb-4 border-bottom">
         <div class="container d-flex flex-wrap justify-content-center">
@@ -17,12 +18,12 @@
                 <span class="fs-4">codeshare</span>
             </a>
             <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Connexion</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Inscription</a></li>
+                <li class="nav-item"><a href={{ path('app_login') }} class="nav-link link-body-emphasis px-2">Connexion</a></li>
+                <li class="nav-item"><a href={{ path('app_register') }} class="nav-link link-body-emphasis px-2">Inscription</a></li>
             </ul>
         </div>
     </header>
-
+{% block body %}{% endblock %}
 <footer class="text-center text-muted my-5">
                     &copy; 2023 - Codeshare
                 </footer>
@@ -31,4 +32,5 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
