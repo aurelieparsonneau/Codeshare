@@ -11,19 +11,18 @@
 <main class="container">
         <section class="row gap-1">
             <aside class="col-md-3 col-sm-12">
-                <img src="./assets/img/favicon.png" class="rounded-pill border d-none d-md-block d-lg-block"
-                    width="300">
-                <h3 class="h2 mt-3">Codeshare <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span></h3>
-                <p class="fs-6 text-muted text-uppercase">Fullstack Dev</p>
+                <img src={{ asset('img/favicon.svg') }} class="rounded-pill border d-none d-md-block d-lg-block"
+                    width="200">
+                    {% for item in user %}
+                <h3 class="h2 mt-3">{{ item.username }} <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span></h3>
+                <p class="fs-6 text-muted text-uppercase">{{ item.job }}</p>
                 <hr>
                 <p class="fs-5">À propos</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ut cumque quisquam
-                    reprehenderit nam provident velit quibusdam consectetur incidunt quo! Atque enim quod dolorum iste
-                    molestiae fugit beatae molestias explicabo.</p>
-                <p><i class="fas fa-map-marker-alt mx-1"></i>Paris, France</p>
-                <p><i class="fas fa-envelope mx-1"></i>hello@codeshare.fr</p>
+                <p>{{ item.bio }}</p>
+                <p><i class="fas fa-map-marker-alt mx-1"></i>{{ item.town }}</p>
+                <p><i class="fas fa-envelope mx-1"></i>{{ item.email }}</p>
                 <hr class="mb-5">
-                
+                {% endfor %}
             </aside> <!-- Sidebar -->
             <div class="col-md-8 border rounded px-3 py-2 mb-3">
                 <div class="d-flex justify-content-between border-bottom mb-3">
