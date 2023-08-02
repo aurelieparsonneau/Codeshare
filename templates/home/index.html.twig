@@ -14,7 +14,7 @@
                 <img src={{ asset('img/favicon.svg') }} class="rounded-pill border d-none d-md-block d-lg-block"
                     width="200">
                     {% for item in user %}
-                <h3 class="h2 mt-3">{{ item.username }} <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span></h3>
+                <h3 class="h2 mt-3">{{ item.user.username }} <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span></h3>
                 <p class="fs-6 text-muted text-uppercase">{{ item.job }}</p>
                 <hr>
                 <p class="fs-5">À propos</p>
@@ -24,6 +24,7 @@
                 <hr class="mb-5">
                 {% endfor %}
             </aside> <!-- Sidebar -->
+            {% for note in notes %}
             <div class="col-md-8 border rounded px-3 py-2 mb-3">
                 <div class="d-flex justify-content-between border-bottom mb-3">
                     <h2>Mes notes</h2>
@@ -33,8 +34,8 @@
                 </div>
                 <div class="row gap-1 justify-content-center">
                     <div class="border rounded col-30 m-1 p-2">
-                        <h4>Titre</h4>
-                        <p>Extrait</p>
+                        <h4>{{note.title}}</h4>
+                        <p>{{note.content}}</p>
                         <a href="./note.html" class="btn btn-dark">Voir</a>
                     </div>
                     <div class="border rounded col-sm-12 col-30 m-1 p-2">
@@ -77,6 +78,7 @@
                         <p>Extrait</p>
                         <a href="./note.html" class="btn btn-dark">Voir</a>
                     </div>
+                    {% endfor %}
                 </div> <!-- Liste des notes -->
                 <div class="d-flex justify-content-center mt-3">
                     <nav aria-label="pagination">
