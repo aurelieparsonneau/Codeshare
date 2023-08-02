@@ -15,8 +15,11 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        // supprime email quand fini le test 
+        // supprime email,password,username quand fini le test 
+             ->add('password',TextType::class)
+             ->add('username',TextType::class)
             ->add('email', EmailType::class)
+            
             ->add('job', TextType::class,[
                 'label' => 'Votre métier',
                 'attr' =>[
