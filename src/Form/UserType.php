@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,47 +16,46 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        // supprime email,password,username quand fini le test 
-             ->add('password',TextType::class)
-             ->add('username',TextType::class)
-            ->add('email', EmailType::class)
-            
-            ->add('job', TextType::class,[
+            // ->add('password', TextType::class)
+            // ->add('username', TextType::class)
+            // ->add('email', EmailType::class)
+
+            ->add('job', TextType::class, [
                 'label' => 'Votre métier',
-                'attr' =>[
-                    'class'=>'form-control mb-3',
+                'attr' => [
+                    'class' => 'form-control mb-3',
                 ]
             ])
-            ->add('bio', TextareaType::class,[
+            ->add('bio', TextareaType::class, [
                 'label' => 'Votre bio',
-                'attr' =>[
-                    'class'=>'form-control mb-3',
+                'attr' => [
+                    'class' => 'form-control mb-3',
                 ]
             ])
-            ->add('town', TextType::class,[
+            ->add('town', TextType::class, [
                 'label' => 'Votre town',
-                'attr' =>[
-                    'class'=>'form-control mb-3',
+                'attr' => [
+                    'class' => 'form-control mb-3',
                 ]
             ])
-            ->add('country', TextType::class,[
+            ->add('country', TextType::class, [
                 'label' => 'Votre country',
-                'attr' =>[
-                    'class'=>'form-control mb-3',
+                'attr' => [
+                    'class' => 'form-control mb-3',
                 ]
             ])
-            ->add('Enregistrer', SubmitType::class,[
-                'attr' =>[
-                    'class'=>'btn btn-dark mb-3',
+            ->add('Enregistrer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-dark mb-3',
                 ]
-            ])
-        ;
+            ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => User::class,
         ]);
     }
 }

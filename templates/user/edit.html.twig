@@ -1,10 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{app.user.username}}{% endblock %}
+{% block title %}Edit User
+{% endblock %}
 
 {% block body %}
-<h1>Edit User</h1>
-<main class="container">
-  {{form(form)}}
-</main>
-{% endblock %}
+<h1 class="m-5">Edit User</h1>
+{{ form(form) }}
+
+
+<!-- Button trigger modal supprimer -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ supprimer mon compte
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">suppression de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       vous voulez sûre de supprimer votre compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <a href={{ path('profile_delete') }} type="button" class="btn btn-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}
