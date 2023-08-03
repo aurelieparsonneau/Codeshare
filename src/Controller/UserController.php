@@ -71,6 +71,7 @@ class UserController extends AbstractController
 
         $entityManager->remove($user);
         $entityManager->flush();
+        return $this->redirectToRoute('app_register', [], Response::HTTP_SEE_OTHER);
     }
 
 
