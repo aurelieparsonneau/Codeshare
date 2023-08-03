@@ -19,17 +19,46 @@
                 <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
                     <h2>{{note.title}}</h2>
                     <div>
+
+
+
+
                         <p>
-                            {# {{note.createdAt}} #}
+                            {# condition note.isPro start  #}
+                             | Statut : 
+            {% if note.isPublic == true %}
+                <span class="green-pill">Public</span>
+            {% else %}
+                <span class="yellow-pill">Privé</span>
+            {% endif %}
+            {% if note.isPro == true %}
+                | <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#3b4142" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45L7.77 18l1.12-4.81l-3.73-3.23l4.92-.42L12 5l1.92 4.53l4.92.42l-3.73 3.23L16.23 18z"/></svg>
+                 <span>Pro</span>
+            {% endif %}
                         </p>
                     </div>
                 </div> <!-- Titre -->
                 <div class="border-bottom mb-5">
+
+
                     <pre>
-                        <code>
+                    {% if note.isPro == false %}
+                      <code>
                             {{note.content}}
                         </code>
+                        {% else %}
+                         {# on vérifie que l'utilisateur est Pro #}
+                         {% if is_granted('ROLE_PREMIUM') %}
+                            <code>
+                            {{note.content}}
+                        </code>
+                        {% else %}
+                        <p>Le contenu de ce Note est réservé aux nembres Pro, Abonnez-vous pour accèder aux Note Pro pour 8€90 par mois <a href={{ path('app_payment')}}>Je m'abonne ici</a> </p>
+                         {% endif %}
+                    {% endif %}                     
                     </pre>
+{# {{ path('app_payment')}} #}
+
                 </div> <!-- La note -->
                 <div>
                     <h6 class="mb-3">Télécharger le code au format PDF</h6>

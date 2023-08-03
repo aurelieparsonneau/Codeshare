@@ -5,130 +5,98 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-
-	<main class="container">
-		<section class="row gap-1">
-			<aside class="col-md-3 col-sm-12 ">
-				<img src={{ asset('img/favicon.svg') }} class="rounded-pill border d-none d-md-block d-lg-block" width="200">
-				<h3 class="h2 mt-3">{{ app.user.username }}
-					<span class="rounded-pill bg-primary text-light h6 px-2">PRO</span>
-				</h3>
-				<p class="fs-6 text-muted text-uppercase">{{ app.user.job }}</p>
-				<hr>
-				<p class="fs-5">À propos</p>
-				<p>{{ app.user.bio }}</p>
-				<p>
-					<i class="fas fa-map-marker-alt mx-1"></i>
-					{{ app.user.town }},
-					{{ app.user.country }}</p>
-				<p>
-					<i class="fas fa-envelope mx-1"></i>
-					{{ app.user.email }}</p>
-				<hr class="mb-5">
-				<a href={{ path('app_user_edit') }} class="btn btn-dark mb-2">Modifier le profil</a>
-				<a href={{ path('app_logout') }} class="btn btn-dark">Déconnexion</a>
 
 
-				<!-- Button trigger modal supprimer -->
-				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					supprimer mon compte
-				</button>
 
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h1 class="modal-title fs-5" id="exampleModalLabel">suppression de compte</h1>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								vous voulez sûre de supprimer votre compte ?
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-								<a href={{ path('profile_delete') }} type="button" class="btn btn-danger">Supprimer</a>
-							</div>
-						</div>
-					</div>
+{# récupération des messages flash #}
+{# {% for label in messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert {{label}}">
+        {{message}}
+        </div>
+    {% endfor %}
+{% endfor %} #}
 
 
-				</aside>
-				<!-- Sidebar -->
-				<div class="col-md-8 border rounded px-3 py-2 mb-3">
-					<div class="d-flex justify-content-between border-bottom mb-3">
-						<h2>Mes notes</h2>
-						<div>
-							<a href={{ path('app_note_new') }} class="btn btn-success">
-								<i class="fas fa-plus"></i>
-							</a>
-						</div>
-					</div>
-					<div class="row">
-						{% for item in notes %}
-							<div class="col-6 gap-1 justify-content-center">
-								<div class="border rounded col m-1 p-2">
-									<h4>{{item.title}}</h4>
-									<p>{{item.content}}</p>
-									<a href={{ path('app_note_show', {'id': item.id} ) }} class="btn btn-dark">Voir</a>
-								</div>
-							</div>
 
-						{% endfor %}
-					</div>
-				</div>
-				<!-- Liste des notes -->
-				<div class="d-flex justify-content-center mt-3">
-					{{ knp_pagination_render(notes) }}
-				</nav>
-			</div>
-			<!-- Pagination -->
-			<h2 class="text-center">Mes achats</h2>
-			<hr>
-			<div class="row gap-1 justify-content-center">
-				<div class="col-3 m-2">
-					<div class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
-						<a href="" class="btn">
-							<i class="fas fa-download"></i>
-						</a>
-					</div>
-					<h6>Produit A</h6>
-				</div>
-				<!-- Produits -->
-				<div class="col-3 m-2">
-					<div class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
-						<a href="" class="btn">
-							<i class="fas fa-download"></i>
-						</a>
-					</div>
-					<h6>Produit B</h6>
-				</div>
-				<!-- Produits -->
-				<div class="col-3 m-2">
-					<div class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
-						<a href="" class="btn">
-							<i class="fas fa-download"></i>
-						</a>
-					</div>
-					<h6>Produit C</h6>
-				</div>
-				<!-- Produits -->
-			</div>
-			<!-- Contenu User -->
-		</section>
-	</main>
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<main class="container">
+        <section class="row gap-1">
+            <aside class="col-md-3 col-sm-12 ">
+                <img src={{ asset('img/favicon.svg') }} class="rounded-pill border d-none d-md-block d-lg-block"
+                    width="200">
+                    
+                {% if is_granted('ROLE_PREMIUM') %}
+                        <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span>
+                    {% endif %}
+                <p class="fs-6 text-muted text-uppercase">{{ app.user.job }}</p>
+                <hr>
+                <p class="fs-5">À propos</p>
+                <p>{{ app.user.bio }}</p>
+                <p><i class="fas fa-map-marker-alt mx-1"></i>{{ app.user.town }}, {{ app.user.country }}</p>
+                <p><i class="fas fa-envelope mx-1"></i>{{ app.user.email }}</p>
+                <hr class="mb-5">
+                <a href={{ path('app_user_edit', {'id': app.user.id}) }} class="btn btn-dark mb-2">Modifier le profil</a>
+                <a href={{ path('app_user_delete', {'id': app.user.id}) }} class="btn btn-dark mb-2">Supprimer le profil</a>
+                <a href={{ path('app_logout') }} class="btn btn-dark">Déconnexion</a>
+              
+            </aside> <!-- Sidebar -->
+            <div class="col-md-8 border rounded px-3 py-2 mb-3">
+                <div class="d-flex justify-content-between border-bottom mb-3">
+                    <h2>Mes notes</h2>
+                    <div>
+                        <a href={{ path('app_note_new') }} class="btn btn-success"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                {% for item in notes %}
+                <div class="col-6 gap-1 justify-content-center">
+                    <div class="border rounded col m-1 p-2">
+                        <h4>{{item.title}}</h4>
+                        <p>{{item.content}}</p>
+                        <a href={{ path('app_note_show', {'id': item.id}) }} class="btn btn-dark">Voir</a>
+                    </div>
+                </div>
+                    
+                    {% endfor %}
+                    </div>
+                </div> <!-- Liste des notes -->
+                <div class="d-flex justify-content-center mt-3">
+                    {{ knp_pagination_render(notes) }}
+                    </nav>
+                </div> <!-- Pagination -->
+                <h2 class="text-center">Mes achats</h2>
+                <hr>
+                <div class="row gap-1 justify-content-center">
+                    <div class="col-3 m-2">
+                        <div
+                            class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
+                            <a href="" class="btn"><i class="fas fa-download"></i></a>
+                        </div>
+                        <h6>Produit A</h6>
+                    </div> <!-- Produits -->
+                    <div class="col-3 m-2">
+                        <div
+                            class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
+                            <a href="" class="btn"><i class="fas fa-download"></i></a>
+                        </div>
+                        <h6>Produit B</h6>
+                    </div> <!-- Produits -->
+                    <div class="col-3 m-2">
+                        <div
+                            class="border rounded mb-2 px-5 py-3 bg-light d-flex justify-content-center align-items-center">
+                            <a href="" class="btn"><i class="fas fa-download"></i></a>
+                        </div>
+                        <h6>Produit C</h6>
+                    </div> <!-- Produits -->
+                </div> <!-- Contenu User -->
+        </section>
+    </main>
 
 
 {% endblock %}
