@@ -49,7 +49,7 @@ class PaymentController extends AbstractController
 
                 $this->addFlash('message', 'La paiement a bien été effectué. Vous êtes désormais Premium !');
 
-                return $this->redirectToRoute('app_page');
+                return $this->redirectToRoute('app_home');
         }
 
         #[Route('/payment/cancel', name: 'app_payment_cancel')]
@@ -57,6 +57,6 @@ class PaymentController extends AbstractController
         {
                 $this->addFlash('message', 'Le paiement a n\' pas abouti. Réessayez.');
 
-                return $this->redirectToRoute('app_page');
+                return $this->redirectToRoute('app_home');
         }
 }

@@ -42,9 +42,38 @@
                 <p><i class="fas fa-envelope mx-1"></i>{{ app.user.email }}</p>
                 <hr class="mb-5">
                 <a href={{ path('app_user_edit', {'id': app.user.id}) }} class="btn btn-dark mb-2">Modifier le profil</a>
-                <a href={{ path('app_user_delete', {'id': app.user.id}) }} class="btn btn-dark mb-2">Supprimer le profil</a>
-                <a href={{ path('app_logout') }} class="btn btn-dark">Déconnexion</a>
+                 <a href={{ path('app_logout') }} class="btn btn-dark">Déconnexion</a>
               
+                
+
+<!-- Button trigger modal supprimer -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ supprimer mon compte
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">suppression de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       vous voulez sûre de supprimer votre compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <a href={{ path('profile_delete') }} type="button" class="btn btn-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+               
             </aside> <!-- Sidebar -->
             <div class="col-md-8 border rounded px-3 py-2 mb-3">
                 <div class="d-flex justify-content-between border-bottom mb-3">
