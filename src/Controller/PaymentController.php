@@ -21,10 +21,10 @@ class PaymentController extends AbstractController
                         'line_items' => [[
                                 'price_data' => [
                                         'currency' => 'eur',
-                                        'unit_amount' => 1000,
+                                        'unit_amount' => 890,
                                         'product_data' => [
                                                 'name' => 'Abonnement Premium',
-                                                'images' => ['https://raw.githubusercontent.com/Jensone/codexpress/master/public/images/logo-codexpress.png'],
+                                                'images' => ['https://raw.githubusercontent.com/aurelieparsonneau/Codeshare/main/public/img/codeshare.png'],
 
                                         ],
                                 ],
@@ -43,7 +43,6 @@ class PaymentController extends AbstractController
         {
                 $user = $this->getUser();
                 $user->setRoles(["ROLE_PREMIUM"]);
-                $user->setIsPremium(true);
 
                 $em->persist($user);
                 $em->flush();

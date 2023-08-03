@@ -27,7 +27,10 @@
             <aside class="col-md-3 col-sm-12 ">
                 <img src={{ asset('img/favicon.svg') }} class="rounded-pill border d-none d-md-block d-lg-block"
                     width="200">
-                <h3 class="h2 mt-3">{{ app.user.username }} <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span></h3>
+                    
+                {% if is_granted('ROLE_PREMIUM') %}
+                        <span class="rounded-pill bg-primary text-light h6 px-2">PRO</span>
+                    {% endif %}
                 <p class="fs-6 text-muted text-uppercase">{{ app.user.job }}</p>
                 <hr>
                 <p class="fs-5">À propos</p>
