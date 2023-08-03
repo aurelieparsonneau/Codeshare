@@ -4,39 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Edit User</h1>
-
-	{# Ne pas utiliser le formulaire créer par make:crud pour modifier l'entité user,
-		    créer un formulaire directement dans le template à cette place pour ensuite le traiter dans le controller (cf. voir comme mettre à jour un user dans le controller ici ligne 42 : https://github.com/Jensone/codexpress/blob/master/src/Controller/PaymentController.php ) #}
-	{# {{ include('user/_form.html.twig', {'button_label': 'Update'}) }} #}
-
-{# Nouveau nickel #}
-	{# {{ form(form) }} #}
+<h1 class="m-5">Edit User</h1>
+{{ form(form) }}
 
 
-	<form>
-		<label for="email">Email: </label><br>
-		<input type="email" id="email" name="email" value="{{app.user.email}}"><br>
-        <label for="Username">Username:</label><br>
-		<input type="text" id="Username" name="username" value="{{app.user.username}}"><br>
-        <label for="Job">Job:</label><br>
-		<input type="text" id="Job" name="job" value="{{app.user.job}}"><br>
-        <label for="Bio">Bio:</label><br>
-		<input type="text" id="Bio" name="bio" value="{{app.user.bio}}"><br>
-        <label for="Town">Town:</label><br>
-		<input type="text" id="Town" name="town" value="{{app.user.town}}"><br>
-        <label for="Country">Country:</label><br>
-		<input type="text" id="Country" name="country" value="{{app.user.country}}"><br>
-        <button type="submit">Update</button>
-	</form>
+<!-- Button trigger modal supprimer -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ supprimer mon compte
+</button>
 
-	<a href="{{ path('app_user_index') }}">back to list</a>
-
-	{{ include('user/_delete_form.html.twig') }}
-   
-{# {{ dump(form) }} #}
-
-	{# {{ app.user.username }} #}
-
-
-{% endblock %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">suppression de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       vous voulez sûre de supprimer votre compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <a href={{ path('profile_delete') }} type="button" class="btn btn-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}
